@@ -1,0 +1,1641 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>慶應義塾大学 カメラクラブ | Keio Camera Club</title>
+<meta name="description" content="慶應義塾大学カメラクラブ（KCC）の公式ホームページ。活動報告、写真展のお知らせ、撮影依頼の受付など。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&family=Noto+Sans+JP:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+<!-- ===== デザイン（色・フォント・レイアウト） ===== -->
+<style>
+:root {
+    --paper: #f6f4ef;
+    --white: #ffffff;
+    --ink: #16191f;
+    --muted: #6d6f75;
+    --line: #dcd8cf;
+    --navy: #0f2453;
+    --red: #b3262d;
+    --gold: #c9a227;
+    --on-navy: #b7c2dd;
+    --serif-en: "Jost", "Noto Sans JP", sans-serif;
+    --serif-ja: "Noto Sans JP", sans-serif;
+    --sans: "Noto Sans JP", sans-serif;
+    --ease: cubic-bezier(.22, .61, .36, 1);
+    --max: 1180px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+body {
+    font-synthesis: none;
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.9;
+    letter-spacing: .04em;
+    -webkit-font-smoothing: antialiased;
+}
+img { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+button, input, select, textarea { font: inherit; color: inherit; }
+button { background: none; border: 0; cursor: pointer; }
+.container { width: min(var(--max), 90vw); margin: 0 auto; }
+
+.ph {
+    position: relative;
+    overflow: hidden;
+    background:
+        repeating-linear-gradient(135deg, rgba(0,0,0,.035) 0 2px, transparent 2px 12px),
+        #d9d5cc;
+}
+.ph::after {
+    content: attr(data-label);
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    font-family: var(--serif-en);
+    font-size: 14px;
+    letter-spacing: .2em;
+    color: rgba(0,0,0,.35);
+}
+.ph img {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.header {
+    position: fixed;
+    inset: 0 0 auto;
+    z-index: 50;
+    color: #fff;
+    transition: background .4s, color .4s, box-shadow .4s;
+}
+.header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 76px;
+    width: min(1320px, 92vw);
+    margin: 0 auto;
+}
+.header.is-scrolled {
+    background: rgba(246, 244, 239, .92);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: var(--ink);
+    box-shadow: 0 1px 0 var(--line);
+}
+.logo { display: flex; align-items: center; gap: 12px; line-height: 1.2; }
+.logo__mark {
+    display: grid;
+    place-items: center;
+    width: 40px; height: 40px;
+    border: 1px solid currentColor;
+    border-radius: 50%;
+    font-family: var(--serif-en);
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: .05em;
+}
+.logo__text small { display: block; font-size: 10px; font-weight: 500; letter-spacing: .15em; opacity: .75; }
+.logo__text strong { font-family: var(--serif-ja); font-size: 16px; font-weight: 700; letter-spacing: .12em; }
+
+.nav { display: flex; align-items: center; gap: 30px; font-size: 13px; font-weight: 500; }
+.nav a { position: relative; padding: 4px 0; }
+.nav a:not(.nav__cta)::after {
+    content: "";
+    position: absolute;
+    left: 0; bottom: 0;
+    width: 100%; height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform .4s var(--ease);
+}
+.nav a:not(.nav__cta):hover::after { transform: scaleX(1); transform-origin: left; }
+.nav__cta {
+    padding: 9px 20px !important;
+    background: var(--red);
+    color: #fff;
+    border-radius: 999px;
+    transition: background .3s;
+}
+.nav__cta:hover { background: #8f1d23; }
+
+.menu-btn { display: none; position: relative; z-index: 60; width: 30px; height: 20px; }
+.menu-btn span {
+    position: absolute; left: 0;
+    width: 100%; height: 1.5px;
+    background: currentColor;
+    transition: transform .4s var(--ease), top .4s var(--ease);
+}
+.menu-btn span:first-child { top: 5px; }
+.menu-btn span:last-child { top: 14px; }
+.menu-open .menu-btn span:first-child { top: 10px; transform: rotate(30deg); }
+.menu-open .menu-btn span:last-child { top: 10px; transform: rotate(-30deg); }
+
+.hero {
+    position: relative;
+    height: 100vh;
+    height: 100svh;
+    min-height: 600px;
+    color: #fff;
+    overflow: hidden;
+    background: #111;
+}
+.hero__slides .ph {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transform: scale(1.08);
+    transition: opacity 1.6s ease, transform 7s linear;
+    background-color: #2a2d33;
+}
+.hero__slides .ph::after { color: rgba(255,255,255,.25); }
+.hero__slides .ph.is-active { opacity: 1; transform: scale(1); }
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,.65), rgba(0,0,0,.05) 55%, rgba(0,0,0,.35));
+    pointer-events: none;
+}
+.hero__content {
+    position: absolute;
+    z-index: 2;
+    left: 0; right: 0; bottom: 12vh;
+    width: min(1320px, 92vw);
+    margin: 0 auto;
+}
+.hero__en {
+    margin: 0 0 14px;
+    font-family: var(--serif-en);
+    font-style: normal;
+    font-size: clamp(18px, 2vw, 24px);
+    letter-spacing: .08em;
+}
+.hero__title {
+    margin: 0;
+    font-family: var(--serif-ja);
+    font-weight: 600;
+    font-size: clamp(36px, 6.4vw, 84px);
+    line-height: 1.35;
+    letter-spacing: .03em;
+}
+.hero__lead { margin: 24px 0 0; font-size: 14px; letter-spacing: .12em; opacity: .9; }
+.hero__en, .hero__title, .hero__lead {
+    opacity: 0;
+    transform: translateY(24px);
+    animation: up 1.4s var(--ease) forwards;
+}
+.hero__title { animation-delay: .25s; }
+.hero__lead  { animation-delay: .5s; }
+@keyframes up { to { opacity: 1; transform: none; } }
+
+.hero__dots {
+    position: absolute;
+    z-index: 2;
+    right: 4vw; bottom: 12vh;
+    display: flex;
+    gap: 10px;
+}
+.hero__dots button {
+    width: 34px; height: 2px;
+    background: rgba(255,255,255,.35);
+    position: relative;
+    overflow: hidden;
+}
+.hero__dots button.is-active::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: #fff;
+    animation: bar 6s linear forwards;
+    transform-origin: left;
+}
+@keyframes bar { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+.tricolor { display: flex; height: 4px; }
+.tricolor i { flex: 1; }
+.tricolor i:nth-child(1) { background: var(--navy); }
+.tricolor i:nth-child(2) { background: var(--red); }
+.tricolor i:nth-child(3) { background: var(--gold); }
+
+.section { padding: 130px 0; }
+.section--white { background: var(--white); }
+.section--navy { background: var(--navy); color: #fff; }
+
+.heading { margin-bottom: 56px; }
+.heading__en {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 0 0 6px;
+    font-family: var(--serif-en);
+    font-style: normal;
+    font-size: 18px;
+    color: var(--red);
+    letter-spacing: .06em;
+}
+.heading__en::before { content: ""; width: 28px; height: 1px; background: currentColor; }
+.section--navy .heading__en { color: var(--on-navy); }
+.heading__ja {
+    margin: 0;
+    font-family: var(--serif-ja);
+    font-weight: 600;
+    font-size: clamp(28px, 3.6vw, 40px);
+    line-height: 1.4;
+    letter-spacing: .1em;
+}
+.heading--center { text-align: center; }
+.heading--center .heading__en { justify-content: center; }
+.heading--center .heading__en::after { content: ""; width: 28px; height: 1px; background: currentColor; }
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 30px;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    font-size: 13px;
+    letter-spacing: .12em;
+    transition: background .3s, color .3s, border-color .3s;
+}
+.btn::after { content: "→"; transition: transform .3s var(--ease); }
+.btn:hover::after { transform: translateX(4px); }
+.btn:hover { background: var(--ink); border-color: var(--ink); color: #fff; }
+.btn--red { background: var(--red); border-color: var(--red); color: #fff; }
+.btn--red:hover { background: #8f1d23; border-color: #8f1d23; }
+
+.reveal { opacity: 0; transform: translateY(36px); transition: opacity 1s var(--ease), transform 1s var(--ease); }
+.reveal.is-visible { opacity: 1; transform: none; }
+
+.news { display: grid; grid-template-columns: 260px 1fr; gap: 60px; }
+.news .heading { margin: 0; }
+.news__more { margin-top: 32px; }
+.news__list { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--line); }
+.news__list a {
+    display: grid;
+    grid-template-columns: 110px 100px 1fr 20px;
+    align-items: center;
+    gap: 16px;
+    padding: 22px 8px;
+    border-bottom: 1px solid var(--line);
+    transition: background .3s, padding .3s var(--ease);
+}
+.news__list a::after { content: "→"; color: var(--muted); transition: transform .3s var(--ease); }
+.news__list a:hover { background: var(--white); padding-left: 16px; }
+.news__list a:hover::after { transform: translateX(4px); color: var(--red); }
+.news__list time { font-family: var(--serif-en); font-size: 16px; color: var(--muted); }
+.tag {
+    justify-self: start;
+    padding: 2px 12px;
+    border: 1px solid var(--navy);
+    border-radius: 999px;
+    font-size: 11px;
+    color: var(--navy);
+    white-space: nowrap;
+}
+.tag--red { border-color: var(--red); color: var(--red); }
+.tag--gold { border-color: var(--muted); color: var(--muted); }
+
+.about { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+.about__photos { position: relative; aspect-ratio: 1 / .9; }
+.about__photos .ph:first-child { position: absolute; left: 0; top: 0; width: 47%; aspect-ratio: 2 / 3; }
+.about__photos .ph:last-child { position: absolute; right: 0; bottom: 0; width: 47%; aspect-ratio: 2 / 3; }
+.about__catch {
+    margin: 0 0 28px;
+    font-family: var(--serif-ja);
+    font-size: clamp(22px, 2.4vw, 28px);
+    line-height: 1.7;
+    letter-spacing: .08em;
+}
+.about__text p { margin: 0 0 1.2em; }
+.stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin-top: 40px;
+    border-top: 1px solid var(--line);
+}
+.stats div { padding: 22px 0 0; }
+.stats div + div { padding-left: 24px; border-left: 1px solid var(--line); }
+.stats dt { font-size: 12px; color: var(--muted); letter-spacing: .1em; }
+.stats dd { margin: 0; font-family: var(--serif-en); font-size: 44px; line-height: 1.2; color: var(--navy); }
+.stats dd small { font-family: var(--sans); font-size: 13px; margin-left: 4px; color: var(--ink); }
+
+.activities { display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; }
+.card .ph { aspect-ratio: 3 / 2; margin-bottom: 20px; }
+.card .ph img { transition: transform 1s var(--ease); }
+.card:hover .ph img { transform: scale(1.05); }
+.card__num { font-family: var(--serif-en); font-size: 14px; color: var(--red); }
+.card h3 { margin: 2px 0 10px; font-family: var(--serif-ja); font-size: 19px; letter-spacing: .08em; }
+.card p { margin: 0; font-size: 13.5px; color: var(--muted); line-height: 1.85; }
+.section--navy .card p { color: rgba(255,255,255,.72); }
+.section--navy .card__num { color: var(--on-navy); }
+.section--navy .ph { background-color: #2a3d6b; }
+.section--navy .ph::after { color: rgba(255,255,255,.3); }
+
+.schedule {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    margin-top: 90px;
+    border-top: 1px solid rgba(255,255,255,.2);
+}
+.schedule__title { grid-column: 1 / -1; margin: 0 0 28px; }
+.schedule div {
+    padding: 26px 18px 10px;
+    border-right: 1px solid rgba(255,255,255,.12);
+    position: relative;
+}
+.schedule div:last-child { border-right: 0; }
+.schedule b { display: block; font-family: var(--serif-en); font-size: 26px; font-weight: 400; }
+.schedule span { font-size: 13px; opacity: .85; line-height: 1.7; display: block; }
+
+.reports__head { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 56px; }
+.reports__head .heading { margin: 0; }
+.reports__filter { display: flex; gap: 8px; flex-wrap: wrap; }
+.reports__filter button {
+    padding: 6px 18px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    font-size: 12px;
+    transition: all .3s;
+}
+.reports__filter button:hover { border-color: var(--ink); }
+.reports__filter button.is-active { background: var(--navy); border-color: var(--navy); color: #fff; }
+
+.reports { display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px 32px; }
+.report { cursor: pointer; }
+.reports__empty {
+    margin: 0;
+    padding: 80px 0;
+    text-align: center;
+    font-family: var(--serif-en);
+    font-style: normal;
+    font-size: 32px;
+    color: var(--muted);
+    letter-spacing: .1em;
+}
+.report.is-hidden { display: none; }
+.report .ph { aspect-ratio: 3 / 2; margin-bottom: 18px; }
+.report .ph img { transition: transform 1s var(--ease); }
+.report:hover .ph img { transform: scale(1.05); }
+.report__meta { display: flex; align-items: center; gap: 12px; font-size: 12px; color: var(--muted); }
+.report__meta time { font-family: var(--serif-en); font-size: 15px; }
+.report h3 {
+    margin: 8px 0 8px;
+    font-family: var(--serif-ja);
+    font-size: 18px;
+    line-height: 1.6;
+    letter-spacing: .06em;
+    transition: color .3s;
+}
+.report:hover h3 { color: var(--red); }
+.report__excerpt { margin: 0; font-size: 13px; color: var(--muted); }
+.report__body { display: none; }
+
+.report--feature { grid-column: 1 / -1; display: grid; grid-template-columns: 1.4fr 1fr; gap: 48px; align-items: center; }
+.report--feature .ph { margin: 0; }
+.report--feature h3 { font-size: 26px; }
+.report--feature .report__excerpt { font-size: 14px; }
+.reports.is-filtered .report--feature:not(.is-hidden) { grid-column: auto; display: block; }
+.reports.is-filtered .report--feature .ph { margin: 0 0 18px; }
+.reports.is-filtered .report--feature h3 { font-size: 18px; }
+.reports.is-filtered .report--feature .report__excerpt { font-size: 13px; }
+
+.report.is-over { display: none; }
+.reports__more { margin-top: 64px; text-align: center; }
+.archive {
+    position: fixed;
+    inset: 0;
+    z-index: 70;
+    background: var(--paper);
+    overflow-y: auto;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .4s, visibility .4s;
+}
+.archive.is-open { opacity: 1; visibility: visible; }
+.archive__bar {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 76px;
+    padding: 0 4vw;
+    background: rgba(246, 244, 239, .94);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 1px 0 var(--line);
+}
+.archive__back { font-size: 13px; letter-spacing: .1em; }
+.archive__back:hover { color: var(--red); }
+.archive__inner { padding: 70px 0 120px; }
+.archive .reports__head { margin-bottom: 48px; }
+.archive .report { opacity: 1; transform: none; }
+
+.modal {
+    position: fixed;
+    inset: 0;
+    z-index: 90;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 6vh 4vw;
+    background: rgba(15, 20, 30, .7);
+    overflow-y: auto;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .4s, visibility .4s;
+}
+.modal.is-open { opacity: 1; visibility: visible; }
+.modal__inner {
+    position: relative;
+    width: min(760px, 100%);
+    background: var(--white);
+    transform: translateY(30px);
+    transition: transform .5s var(--ease);
+}
+.modal.is-open .modal__inner { transform: none; }
+.modal__inner .ph { aspect-ratio: 3 / 2; }
+
+.modal__inner .ph img.m-slide {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity .6s ease;
+}
+.modal__inner .ph img.m-slide.is-on { opacity: 1; }
+.m-arrow {
+    position: absolute;
+    top: 50%;
+    z-index: 3;
+    width: 48px;
+    height: 48px;
+    margin-top: -24px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, .85);
+    color: var(--ink);
+    font-size: 18px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, .15);
+    transition: background .3s, transform .3s var(--ease);
+}
+.m-arrow:hover { background: #fff; transform: scale(1.06); }
+.m-arrow--prev { left: 16px; }
+.m-arrow--next { right: 16px; }
+.m-dots {
+    position: absolute;
+    left: 0; right: 0; bottom: 14px;
+    z-index: 3;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+}
+.m-dots button {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, .5);
+    padding: 0;
+}
+.m-dots button.is-on { background: #fff; }
+.modal__content { padding: 40px 48px 56px; }
+.modal__content h3 { margin: 10px 0 24px; font-family: var(--serif-ja); font-size: 26px; line-height: 1.5; }
+.modal__content p { margin: 0 0 1.3em; }
+.modal__close {
+    position: absolute;
+    z-index: 3;
+    top: 14px; right: 14px;
+    width: 42px; height: 42px;
+    border-radius: 50%;
+    background: var(--white);
+    font-size: 20px;
+    line-height: 1;
+}
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 220px;
+    grid-auto-flow: dense;
+    gap: 12px;
+}
+.gallery figure { margin: 0; position: relative; cursor: zoom-in; }
+.gallery figure .ph { height: 100%; }
+.gallery figure .ph img { transition: transform 1s var(--ease); }
+.gallery figure:hover .ph img { transform: scale(1.05); }
+.gallery figure.tall { grid-row: span 2; }
+.gallery figure.wide { grid-column: span 2; }
+.gallery figcaption {
+    position: absolute;
+    z-index: 2;
+    left: 0; right: 0; bottom: 0;
+    padding: 30px 14px 10px;
+    background: linear-gradient(transparent, rgba(0,0,0,.6));
+    color: #fff;
+    font-size: 12px;
+    opacity: 0;
+    transition: opacity .4s;
+}
+.gallery figure:hover figcaption { opacity: 1; }
+.works { columns: 3; column-gap: 20px; }
+.works figure { position: relative; margin: 0 0 20px; break-inside: avoid; cursor: zoom-in; overflow: hidden; }
+.works img { display: block; width: 100%; height: auto; transition: transform 1s var(--ease); }
+.works figure:hover img { transform: scale(1.04); }
+.works img.is-land { aspect-ratio: 3 / 2; object-fit: cover; }
+.works figcaption {
+    position: absolute; left: 0; right: 0; bottom: 0;
+    padding: 30px 14px 10px;
+    background: linear-gradient(transparent, rgba(0,0,0,.6));
+    color: #fff; font-size: 12px;
+    opacity: 0; transition: opacity .4s;
+}
+.works figure:hover figcaption { opacity: 1; }
+@media (max-width: 860px) { .works { columns: 2; column-gap: 12px; } .works figure { margin-bottom: 12px; } }
+@media (hover: none) { .works figcaption { opacity: 1; } }
+.gallery__note { margin-top: 28px; text-align: center; font-size: 13px; color: var(--muted); }
+
+.lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 95;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgba(10,10,12,.95);
+    color: #fff;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .4s, visibility .4s;
+}
+.lightbox.is-open { opacity: 1; visibility: visible; }
+.lightbox__img { max-width: 86vw; max-height: 78vh; min-width: 300px; min-height: 200px; }
+.lightbox__img.ph { width: 60vw; height: 60vh; }
+.lightbox p { margin: 16px 0 0; font-size: 13px; opacity: .8; }
+.lightbox button { position: absolute; color: #fff; font-size: 24px; padding: 16px; opacity: .7; }
+.lightbox button:hover { opacity: 1; }
+.lightbox__close { top: 16px; right: 20px; }
+.lightbox__prev { left: 2vw; top: 50%; transform: translateY(-50%); }
+.lightbox__next { right: 2vw; top: 50%; transform: translateY(-50%); }
+
+.request__intro { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; margin-bottom: 80px; }
+.request__intro .heading { margin-bottom: 28px; }
+.request__lead { margin: 0; font-family: var(--serif-ja); font-size: 20px; line-height: 1.9; letter-spacing: .06em; }
+.request__types { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; align-content: start; }
+.request__types li {
+    padding: 22px 22px 20px;
+    background: var(--white);
+    border-top: 2px solid var(--navy);
+}
+.request__types b { display: block; font-family: var(--serif-ja); font-size: 16px; margin-bottom: 4px; }
+.request__types span { font-size: 12.5px; color: var(--muted); line-height: 1.7; display: block; }
+
+.flow { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin: 0 0 80px; padding: 0; list-style: none; counter-reset: flow; }
+.flow li { position: relative; padding: 0 24px; text-align: center; counter-increment: flow; }
+.flow li:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    top: 34px; right: -6px;
+    width: 12px; height: 12px;
+    border-top: 1px solid var(--muted);
+    border-right: 1px solid var(--muted);
+    transform: rotate(45deg);
+}
+.flow li::before {
+    content: "0" counter(flow);
+    display: grid;
+    place-items: center;
+    width: 68px; height: 68px;
+    margin: 0 auto 18px;
+    border-radius: 50%;
+    background: var(--navy);
+    color: #fff;
+    font-family: var(--serif-en);
+    font-size: 22px;
+}
+.flow b { display: block; font-family: var(--serif-ja); font-size: 16px; margin-bottom: 6px; }
+.flow span { font-size: 13px; color: var(--muted); line-height: 1.8; display: block; }
+
+.request__box { display: grid; grid-template-columns: 1fr 1.4fr; background: var(--white); }
+.request__notes { padding: 48px; background: var(--navy); color: #fff; }
+.request__notes h3 { margin: 0 0 20px; font-family: var(--serif-ja); font-size: 20px; }
+.request__notes ul { margin: 0; padding: 0; list-style: none; }
+.request__notes li { position: relative; padding: 12px 0 12px 20px; border-bottom: 1px solid rgba(255,255,255,.15); font-size: 13.5px; line-height: 1.8; }
+.request__notes li::before { content: ""; position: absolute; left: 0; top: 22px; width: 7px; height: 7px; background: var(--gold); border-radius: 50%; }
+
+.form { padding: 48px; display: grid; grid-template-columns: 1fr 1fr; gap: 22px 20px; }
+.form h3 { grid-column: 1 / -1; margin: 0; font-family: var(--serif-ja); font-size: 20px; }
+.form label { display: block; font-size: 12.5px; letter-spacing: .08em; }
+.form label.full { grid-column: 1 / -1; }
+.form em { font-style: normal; color: var(--red); margin-left: 4px; font-size: 11px; }
+.form input, .form select, .form textarea {
+    display: block;
+    width: 100%;
+    margin-top: 6px;
+    padding: 12px 14px;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    background: var(--paper);
+    font-size: 14px;
+    transition: border-color .3s, background .3s;
+}
+.form input:focus, .form select:focus, .form textarea:focus { outline: none; border-color: var(--navy); background: #fff; }
+.form input, .form select { height: 50px; }
+.form textarea { min-height: 140px; resize: vertical; }
+.form__foot { grid-column: 1 / -1; display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+.form__foot p { margin: 0; font-size: 12px; color: var(--muted); }
+.form .btn { cursor: pointer; }
+
+.join { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; }
+.join__info { margin: 0 0 36px; border-top: 1px solid var(--line); }
+.join__info div { display: grid; grid-template-columns: 110px 1fr; padding: 16px 0; border-bottom: 1px solid var(--line); font-size: 14px; }
+.join__info dt { color: var(--muted); font-size: 13px; }
+.join__info dd { margin: 0; }
+.faq h3 { margin: 0 0 16px; font-family: var(--serif-en); font-style: normal; font-weight: 400; font-size: 22px; color: var(--red); }
+.faq details { border-bottom: 1px solid var(--line); }
+.faq details:first-of-type { border-top: 1px solid var(--line); }
+.faq summary {
+    position: relative;
+    padding: 20px 40px 20px 34px;
+    list-style: none;
+    cursor: pointer;
+    font-weight: 500;
+}
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::before { content: "Q"; position: absolute; left: 0; font-family: var(--serif-en); font-size: 20px; color: var(--navy); top: 15px; }
+.faq summary::after { content: "+"; position: absolute; right: 8px; top: 16px; font-size: 22px; font-weight: 300; transition: transform .3s; }
+.faq details[open] summary::after { transform: rotate(45deg); }
+.faq details p { margin: 0; padding: 0 0 22px 34px; font-size: 14px; color: var(--muted); }
+
+.footer { background: #0b1a3d; color: rgba(255,255,255,.85); }
+.footer__inner { display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 60px; padding: 90px 0 60px; }
+.footer .logo { color: #fff; margin-bottom: 24px; }
+.footer__about { font-size: 13px; line-height: 2; margin: 0; }
+.footer h4 { margin: 0 0 16px; font-family: var(--serif-en); font-style: normal; font-weight: 400; font-size: 18px; color: var(--on-navy); }
+.footer ul { margin: 0; padding: 0; list-style: none; font-size: 13px; }
+.footer li { padding: 5px 0; }
+.footer li a:hover { color: #fff; text-decoration: underline; }
+.footer__bottom { display: flex; justify-content: space-between; padding: 22px 0; border-top: 1px solid rgba(255,255,255,.12); font-size: 11.5px; color: rgba(255,255,255,.55); }
+
+.to-top {
+    position: fixed;
+    right: 24px; bottom: 24px;
+    z-index: 40;
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    background: var(--navy);
+    color: #fff;
+    font-size: 18px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all .4s var(--ease);
+}
+.to-top.is-show { opacity: 1; visibility: visible; transform: none; }
+
+@media (max-width: 1024px) {
+    .nav { gap: 20px; font-size: 12px; }
+    .activities { grid-template-columns: repeat(2, 1fr); }
+    .schedule { grid-template-columns: repeat(3, 1fr); }
+    .schedule div:nth-child(4) { border-right: 0; }
+    .gallery { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 860px) {
+    .section { padding: 96px 0; }
+    .menu-btn { display: block; }
+    .nav {
+        position: fixed;
+        inset: 0;
+        flex-direction: column;
+        justify-content: center;
+        gap: 26px;
+        background: var(--navy);
+        color: #fff;
+        font-family: var(--serif-ja);
+        font-size: 20px;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity .4s, visibility .4s;
+    }
+    .nav__cta { font-family: var(--sans); font-size: 15px; margin-top: 10px; }
+    .menu-open .nav { opacity: 1; visibility: visible; }
+    .menu-open .header { color: #fff; background: transparent; box-shadow: none; }
+    .menu-open { overflow: hidden; }
+
+    .news, .about, .request__intro, .request__box, .join, .footer__inner { grid-template-columns: 1fr; gap: 48px; }
+    .news__list a { grid-template-columns: 1fr auto; gap: 4px 12px; }
+    .news__list a span:last-child { grid-column: 1 / -1; }
+    .news__list a::after { display: none; }
+    .reports__head { flex-direction: column; align-items: flex-start; gap: 24px; }
+    .reports { grid-template-columns: 1fr 1fr; gap: 40px 20px; }
+    .report--feature { grid-template-columns: 1fr; gap: 20px; }
+    .flow { grid-template-columns: 1fr 1fr; gap: 40px 0; }
+    .flow li:nth-child(2)::after { display: none; }
+    .gallery { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 160px; }
+    .request__notes, .form { padding: 32px 24px; }
+}
+
+@media (max-width: 560px) {
+    .hero__dots { right: auto; left: 5vw; bottom: 5vh; }
+    .activities, .reports { grid-template-columns: 1fr; }
+    .schedule { grid-template-columns: 1fr 1fr; }
+    .schedule div { border-right: 0; }
+    .request__types { grid-template-columns: 1fr; }
+    .flow { grid-template-columns: 1fr; }
+    .flow li::after { display: none; }
+    .form { grid-template-columns: 1fr; }
+    .stats dd { font-size: 34px; }
+    .stats div + div { padding-left: 14px; }
+    .modal__content { padding: 28px 22px 40px; }
+    .footer__bottom { flex-direction: column; gap: 6px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+    .reveal, .hero__en, .hero__title, .hero__lead { opacity: 1; transform: none; }
+}
+
+.gallery .ph img.g-extra {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    opacity: 0;
+    transition: opacity 1.4s ease, transform 1s var(--ease);
+}
+.gallery .ph img.g-extra.is-on { opacity: 1; }
+
+.ph[data-credit]::before {
+    content: attr(data-credit);
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    z-index: 4;
+    padding: 30px 14px 10px;
+    background: linear-gradient(transparent, rgba(0,0,0,.6));
+    color: #fff;
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: .08em;
+    text-align: left;
+    opacity: 0;
+    transition: opacity .4s;
+    pointer-events: none;
+}
+.ph[data-credit=""]::before { display: none; }
+.ph[data-credit]:hover::before { opacity: 1; }
+.hero .ph[data-credit]::before {
+    left: auto; right: 4vw; bottom: calc(12vh + 22px);
+    padding: 0;
+    background: none;
+    font-size: 11px;
+    opacity: .75;
+}
+@media (hover: none) { .ph[data-credit]::before { opacity: 1; } }
+
+.heading__en, .hero__en, .faq h3, .footer h4, .archive__bar .heading__en {
+    text-transform: uppercase;
+    letter-spacing: .25em;
+    font-weight: 400;
+}
+body { font-weight: 400; }
+</style>
+</head>
+<body>
+
+<!-- ===== ヘッダー（ロゴ・メニュー） ===== -->
+<header class="header" id="header">
+    <div class="header__inner">
+        <a href="#top" class="logo">
+
+            <span class="logo__text">
+                <small>KEIO CAMERA CLUB</small>
+                <strong>慶應カメラクラブ</strong>
+            </span>
+        </a>
+        <nav class="nav" id="nav">
+            <a href="#news">お知らせ</a>
+            <a href="#about">私たちについて</a>
+            <a href="#reports">活動報告</a>
+            <a href="#gallery">ギャラリー</a>
+            <a href="#join">入部案内</a>
+            <a href="#request">撮影依頼</a>
+        </nav>
+        <button class="menu-btn" id="menuBtn" aria-label="メニュー"><span></span><span></span></button>
+    </div>
+</header>
+
+<main id="top">
+
+<!-- ===== トップ（スライドショー） ===== -->
+<section class="hero">
+    <div class="hero__slides" id="slides">
+        <div class="ph is-active" data-label="hero1.jpg" data-credit="撮影者：M.A"><img src="images/hero1.jpg" alt="" onerror="this.remove()"></div>
+        <div class="ph" data-label="hero2.jpg" data-credit="撮影者：M.A"><img src="images/hero2.jpg" alt="" onerror="this.remove()"></div>
+        <div class="ph" data-label="hero3.jpg" data-credit="撮影者：a.a"><img src="images/hero3.jpg" alt="" onerror="this.remove()"></div>
+    </div>
+    <div class="hero__content">
+        <p class="hero__en">Keio Camera Club</p>
+        <h1 class="hero__title">一瞬を、<br>ともに残す。</h1>
+        <p class="hero__lead">慶應義塾大学 カメラクラブ 公式ホームページ</p>
+    </div>
+    <div class="hero__dots" id="dots"></div>
+</section>
+<div class="tricolor"><i></i><i></i><i></i></div>
+
+<!-- ===== お知らせ ===== -->
+<section class="section" id="news">
+    <div class="container news">
+        <div class="reveal">
+            <div class="heading">
+                <p class="heading__en">News</p>
+                <h2 class="heading__ja">お知らせ</h2>
+            </div>
+            <a href="#reports" class="btn news__more">活動報告を見る</a>
+        </div>
+        <ul class="news__list reveal">
+            <li><a href="news/20261101.html"><time>2026.11.05</time><span class="tag tag--red">写真展</span><span>三田祭にて写真展を開催します</span></a></li>
+            <li><a href="news/20261103.html"><time>2026.11.01</time><span class="tag">活動報告</span><span>早慶合同撮影会の様子を公開しました</span></a></li>
+            <li><a href="news/20260920.html"><time>2026.09.20</time><span class="tag tag--gold">募集</span><span>秋学期の新入部員を募集しています</span></a></li>
+            <li><a href="news/20260710.html"><time>2026.07.10</time><span class="tag">お知らせ</span><span>ホームページを公開しました</span></a></li>
+        </ul>
+    </div>
+</section>
+
+<!-- ===== 私たちについて ===== -->
+<section class="section section--white" id="about">
+    <div class="container about">
+        <div class="about__photos reveal">
+            <div class="ph" data-label="about1.jpg" data-credit="撮影者：○○"><img src="images/about1.jpg" alt="" onerror="this.remove()"></div>
+            <div class="ph" data-label="about2.jpg" data-credit="撮影者：Y.K"><img src="images/about2.jpg" alt="" onerror="this.remove()"></div>
+        </div>
+        <div class="about__text reveal">
+            <div class="heading">
+                <p class="heading__en">About us</p>
+                <h2 class="heading__ja">私たちについて</h2>
+            </div>
+            <p class="about__catch">今年で創立100周年。<br>初心者もカメラガチ勢も、仲良く。</p>
+            <p>
+                カメラクラブ（KCC）は、今年で創立100周年を迎える、学内唯一の公認カメラサークルです。日吉・三田・矢上・芝共立・信濃町・湘南藤沢と、慶應義塾大学の6つのキャンパスすべてから部員が集まり、初心者からカメラガチ勢まで、100名を超える部員で一年を通して活動しています。
+            </p>
+            <p>
+                月に1〜2回の撮影会や平日の活動や三田祭での写真展、合宿など、学年学部を問わず親睦を深められるイベントがたくさんあります。カメラの貸し出しはもちろん、部員が使い方から撮影のコツまで丁寧にサポートするので、初心者の方やカメラを持っていない方も大歓迎です！
+            </p>
+            <dl class="stats">
+                <div><dt>部員数</dt><dd>140<small>名</small></dd></div>
+                <div><dt>キャンパス</dt><dd>6<small>校地すべて</small></dd></div>
+                <div><dt>創立</dt><dd>100<small>周年</small></dd></div>
+            </dl>
+        </div>
+    </div>
+</section>
+
+<!-- ===== 活動内容・年間スケジュール ===== -->
+<section class="section section--navy" id="activities">
+    <div class="container">
+        <div class="heading heading--center reveal">
+            <p class="heading__en">Activities</p>
+            <h2 class="heading__ja">活動内容</h2>
+        </div>
+        <div class="activities">
+            <article class="card reveal">
+                <div class="ph" data-label="act1.jpg" data-credit="撮影者：Y.Y"><img src="images/act1.jpg" alt="" onerror="this.remove()"></div>
+                <span class="card__num">01</span>
+                <h3>撮影会</h3>
+                <p>月に1〜2回、主に土日に開催します。数人ずつの班に分かれて行動し、写真撮影や散策を楽しみます。</p>
+            </article>
+            <article class="card reveal">
+                <div class="ph" data-label="act2.jpg" data-credit="撮影者：S.A"><img src="images/act2.jpg" alt="" onerror="this.remove()"></div>
+                <span class="card__num">02</span>
+                <h3>パート会</h3>
+                <p>平日の授業後に行う気軽に参加できる活動です。授業終わりにふらっと写真を撮ったり、カメラについて語ったりすることができます。</p>
+            </article>
+            <article class="card reveal">
+                <div class="ph" data-label="act3.jpg" data-credit="撮影者：T.M"><img src="images/act3.jpg" alt="" onerror="this.remove()"></div>
+                <span class="card__num">03</span>
+                <h3>三田祭写真展</h3>
+                <p>部員一人ひとりの制作活動の集大成となる写真展を開催し、日頃の活動を通して撮影した作品を展示します。</p>
+            </article>
+            <article class="card reveal">
+                <div class="ph" data-label="act4.jpg" data-credit="撮影者：M.A"><img src="images/act4.jpg" alt="" onerror="this.remove()"></div>
+                <span class="card__num">04</span>
+                <h3>そのほか合宿やイベント</h3>
+                <p>合宿や早慶合同撮影会、学年ごとのイベントなど。学年・学部を越えて仲良くなれるチャンスです。</p>
+            </article>
+        </div>
+
+        <div class="schedule reveal">
+            <h3 class="schedule__title heading__en">Annual schedule</h3>
+            <div><b>4月</b><span>新歓・新入生撮影会</span></div>
+            <div><b>6月</b><span>早慶合同撮影会</span></div>
+            <div><b>8月</b><span>夏合宿</span></div>
+            <div><b>11月</b><span>三田祭 写真展</span></div>
+            <div><b>12月</b><span>追いコン撮影会</span></div>
+            <div><b>2月</b><span>春合宿</span></div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== 活動報告 ===== -->
+<section class="section" id="reports">
+    <div class="container">
+        <div class="reports__head reveal">
+            <div class="heading">
+                <p class="heading__en">Reports</p>
+                <h2 class="heading__ja">活動報告</h2>
+            </div>
+            <div class="reports__filter" id="reportFilter">
+                <button class="is-active" data-filter="all">すべて</button>
+                <button data-filter="撮影会">撮影会</button>
+                <button data-filter="写真展">写真展</button>
+                <button data-filter="合宿">合宿</button>
+                <button data-filter="その他">その他</button>
+            </div>
+        </div>
+
+        <div class="reports">
+            <article class="report report--feature reveal" data-cat="写真展">
+                <div class="ph" data-label="report4.jpg" data-credit="撮影者：T.M" data-credit-2="撮影者：T.M"><img src="images/report4.jpg" alt="" onerror="this.remove()"></div>
+                <div>
+                    <div class="report__meta"><time>2026.11.05</time><span class="tag">写真展</span></div>
+                    <h3>三田祭で写真を展示します</h3>
+                    <p class="report__excerpt">三田祭期間中に院校舎2Fにて、部員たちの作品を展示します。お気軽に遊びに来てください。</p>
+                    <div class="report__body">
+                    <p>三田祭期間の11月20日から23日にかけ、三田キャンパスの院校舎2Fにて三田祭写真展を行います。
+                    <br>テーマは「百光繚乱」。部員たちの制作活動の集大成が並ぶほか、ZINEも販売する予定です。ぜひお見逃しなく！</p>
+                    </div>
+                </div>
+            </article>
+
+            <article class="report reveal" data-cat="撮影会">
+                <div class="ph" data-label="report1.jpg" data-credit="撮影者：mitei"><img src="images/report1.jpg" alt="" onerror="this.remove()"></div>
+                <div class="report__meta"><time>2026.11.01</time><span class="tag">撮影会</span></div>
+                <h3>早慶合同撮影会＠東京たてもの園</h3>
+                <p class="report__excerpt">11月1日、早稲田大学写真部と合同で撮影会を行いました。</p>
+                <div class="report__body">
+                <p>11月1日に早稲田大学写真部WPSの方々と、東京たてもの園にて合同の撮影会を開催しました。
+                        <br>当日は晴天。5つほどの班に分かれて園内を散策、交流を深めました。
+                        <br>好きな写真の話からサークル運営に至るまで、大いに刺激ある活動でした。</p>
+                </div>
+            </article>
+
+            <article class="report reveal" data-cat="合宿">
+                <div class="ph" data-label="report5.jpg" data-credit="撮影者：Y.H" data-credit-2="撮影者：M.A"><img src="images/report5.jpg" alt="" onerror="this.remove()"></div>
+                <div class="report__meta"><time>2026.08.31</time><span class="tag">合宿</span></div>
+                <h3>夏合宿 in 白馬</h3>
+                <p class="report__excerpt">8月31日〜9月2日、長野県の白馬村へ夏合宿に行きました。</p>
+                <div class="report__body">
+                <p>今年の夏合宿は、長野県の白馬村で行われました。
+                    <br>8月31日から9月2日まで、白馬村にて2泊3日の日程で合宿を開催しました。
+                    <br>1年生から3年生までの総勢40名ほどが参加し、宿でのBBQや花火、松本市内の散策などを楽しみました。
+                    <br>概ね天候にも恵まれ、充実した合宿となりました。</p>
+                </div>
+            </article>
+
+            <article class="report reveal" data-cat="撮影会">
+                <div class="ph" data-label="report3.jpg" data-credit="撮影者：N.T" data-credit-2="撮影者：S.L"><img src="images/report3.jpg" alt="" onerror="this.remove()"></div>
+                <div class="report__meta"><time>2026.05.10</time><span class="tag">撮影会</span></div>
+                <h3>新歓撮影会@日比谷・丸の内へ</h3>
+                <p class="report__excerpt">新入生を迎え、日比谷・丸の内付近を散策しながらの撮影会を行いました。</p>
+                <div class="report__body">
+                <p>5月10日に、新歓活動の一環として日比谷や丸の内を散策する撮影会を行いました。
+                    <br>新入生の中には一眼カメラを初めて扱う初心者も多く、履修相談もそこそこに部員から操作方法を教わり、撮影を楽しみました。</p>
+                </div>
+            </article>
+        </div>
+        <p class="reports__empty" id="reportsEmpty" hidden>Nothing</p>
+        <div class="reports__more reveal">
+            <button class="btn" id="archiveOpen">これまでの活動をすべて見る</button>
+        </div>
+    </div>
+</section>
+
+<!-- ===== これまでの活動（一覧画面） ===== -->
+<div class="archive" id="archive" aria-hidden="true">
+    <div class="archive__bar">
+        <button class="archive__back" id="archiveClose">← トップに戻る</button>
+        <span class="heading__en" style="margin:0">Archive</span>
+    </div>
+    <div class="container archive__inner">
+        <div class="reports__head">
+            <div class="heading" style="margin:0">
+                <p class="heading__en">Reports</p>
+                <h2 class="heading__ja">これまでの活動</h2>
+            </div>
+            <div class="reports__filter" id="archiveFilter"></div>
+        </div>
+        <div class="reports is-filtered" id="archiveList"></div>
+        <p class="reports__empty" id="archiveEmpty" hidden>Nothing</p>
+    </div>
+</div>
+
+<!-- ===== すべての作品 ===== -->
+<div class="archive" id="works" aria-hidden="true">
+    <div class="archive__bar">
+        <button class="archive__back" id="worksClose">← トップに戻る</button>
+        <span class="heading__en" style="margin:0">Gallery</span>
+    </div>
+    <div class="container archive__inner">
+        <div class="heading heading--center">
+            <p class="heading__en">Gallery</p>
+            <h2 class="heading__ja">すべての作品</h2>
+        </div>
+        <div class="works" id="worksList"></div>
+        <p class="gallery__note">もっと見たい方は <a href="https://instagram.com/" target="_blank" rel="noopener" style="text-decoration:underline">Instagram</a> へ</p>
+    </div>
+</div>
+
+<!-- ===== 活動報告の記事を開いたときの画面 ===== -->
+<div class="modal" id="modal">
+    <div class="modal__inner">
+        <button class="modal__close" id="modalClose" aria-label="閉じる">×</button>
+        <div id="modalBody"></div>
+    </div>
+</div>
+
+<!-- ===== 部員の作品 ===== -->
+<section class="section section--white" id="gallery">
+    <div class="container">
+        <div class="heading heading--center reveal">
+            <p class="heading__en">Gallery</p>
+            <h2 class="heading__ja">部員の作品</h2>
+        </div>
+        <div class="gallery reveal" id="galleryGrid">
+            <figure class="tall"><div class="ph" data-label="g1.jpg"><img src="images/g1.jpg" alt="" onerror="this.remove()"></div><figcaption>撮影者:M.O</figcaption></figure>
+            <figure class="wide"><div class="ph" data-label="g2.jpg"><img src="images/g2.jpg" alt="" onerror="this.remove()"></div><figcaption>撮影者:Y.Y</figcaption></figure>
+            <figure><div class="ph" data-label="g3.jpg"><img src="images/g3.jpg" alt="" onerror="this.remove()"></div><figcaption>撮影者：H.K</figcaption></figure>
+            <figure><div class="ph" data-label="g4.jpg"><img src="images/g4.jpg" alt="" onerror="this.remove()"></div><figcaption>撮影者：M.A</figcaption></figure>
+            <figure><div class="ph" data-label="g5.jpg"><img src="images/g5.jpg" alt="" onerror="this.remove()"></div><figcaption>撮影者:Y.Y</figcaption></figure>
+            <figure class="tall"><div class="ph" data-label="g6.jpg"><img src="images/g6.jpg" alt="" onerror="this.remove()"></div><figcaption>撮影者：M.O</figcaption></figure>
+            <figure><div class="ph" data-label="g8.jpg"><img src="images/g8.jpg" alt="" onerror="this.remove()"></div><figcaption>撮影者:H.F</figcaption></figure>
+            <figure class="wide"><div class="ph" data-label="g7.jpg"><img src="images/g7.jpg" alt="" onerror="this.remove()" style="object-position: center 80%"></div><figcaption>撮影者：H.K</figcaption></figure>
+        </div>
+        <div class="reports__more reveal">
+            <button class="btn" id="worksOpen">すべての作品を見る</button>
+        </div>
+    </div>
+</section>
+
+<!-- ===== ギャラリーの写真を拡大したときの画面 ===== -->
+<div class="lightbox" id="lightbox">
+    <button class="lightbox__close" id="lbClose" aria-label="閉じる">×</button>
+    <button class="lightbox__prev" id="lbPrev" aria-label="前へ">←</button>
+    <div id="lbImg"></div>
+    <p id="lbCap"></p>
+    <button class="lightbox__next" id="lbNext" aria-label="次へ">→</button>
+</div>
+
+<!-- ===== 撮影のご依頼 ===== -->
+<section class="section" id="request">
+    <div class="container">
+        <div class="request__intro">
+            <div class="reveal">
+                <div class="heading">
+                    <p class="heading__en">Photo request</p>
+                    <h2 class="heading__ja">撮影のご依頼</h2>
+                </div>
+                <p class="request__lead">
+                    学内イベントやサークル活動、<br>
+                    大切な記念の一枚を、<br>
+                    カメラクラブの部員が撮影します。
+                </p>
+            </div>
+            <ul class="request__types reveal">
+                <li><b>イベント撮影</b><span>学園祭・公演・試合・式典など</span></li>
+                <li><b>団体写真・宣材</b><span>サークルや団体のパンフレット・SNS用写真</span></li>
+                <li><b>ポートレート</b><span>プロフィール写真・卒業記念など</span></li>
+                <li><b>その他</b><span>内容に応じてご相談ください</span></li>
+            </ul>
+        </div>
+
+        <ol class="flow reveal">
+            <li><b>お問い合わせ</b><span>下のフォームから<br>内容をお送りください</span></li>
+            <li><b>ご相談・お見積り</b><span>担当者から○日以内に<br>ご連絡します</span></li>
+            <li><b>撮影</b><span>当日、部員が<br>撮影に伺います</span></li>
+            <li><b>納品</b><span>セレクト・現像した写真を<br>データでお渡しします</span></li>
+        </ol>
+
+        <div class="request__box reveal">
+            <div class="request__notes">
+                <h3>ご依頼の前に</h3>
+                <ul>
+                    <li>撮影日の○週間前までにご連絡ください。</li>
+                    <li>部員の予定によってはお受けできない場合があります。</li>
+                    <li>謝礼・交通費については、ご相談のうえ決めさせていただきます。</li>
+                    <li>撮影した写真は、クラブの活動紹介に使わせていただく場合があります（ご希望に応じて対応します）。</li>
+                </ul>
+            </div>
+
+            <form class="form" id="requestForm">
+                <h3>依頼フォーム</h3>
+                <label>お名前<em>必須</em><input type="text" name="name" required></label>
+                <label>団体名・ご所属<input type="text" name="org"></label>
+                <label>メールアドレス<em>必須</em><input type="email" name="email" required></label>
+                <label>撮影の種類
+                    <select name="type">
+                        <option>イベント撮影</option>
+                        <option>団体写真・宣材</option>
+                        <option>ポートレート</option>
+                        <option>その他</option>
+                    </select>
+                </label>
+                <label>撮影希望日<input type="date" name="date"></label>
+                <label>撮影場所<input type="text" name="place" placeholder="例：日吉キャンパス"></label>
+                <label class="full">ご依頼内容<em>必須</em><textarea name="message" required placeholder="撮影の内容、人数、時間帯、写真の用途などをご記入ください"></textarea></label>
+                <div class="form__foot">
+                    <button type="submit" class="btn btn--red">内容を確認して送信</button>
+                    <p>送信するとメールアプリが開きます。</p>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- ===== 入部案内・Q&A ===== -->
+<section class="section section--white" id="join">
+    <div class="container join">
+        <div class="reveal">
+            <div class="heading">
+                <p class="heading__en">Join us</p>
+                <h2 class="heading__ja">入部案内</h2>
+            </div>
+            <dl class="join__info">
+                <div><dt>対象</dt><dd>慶應義塾大学の塾生（学年・学部・キャンパス不問）</dd></div>
+                <div><dt>活動日</dt><dd>撮影会：月1〜2回（土日）<br>パート会：平日の放課後</dd></div>
+                <div><dt>活動場所</dt><dd>日吉キャンパス、三田キャンパス etc.</dd></div>
+                <div><dt>部費</dt><dd>8000円／年　,　5500円／半期</dd></div>
+                <div><dt>部員数</dt><dd>159名（1年 75名／2年 37名／3年 25名／4年 19名／5・6年 3名）</dd></div>
+                <div><dt>男女比</dt><dd>男子 6：女子 4</dd></div>
+            </dl>
+            <a href="https://instagram.com/" target="_blank" rel="noopener" class="btn">InstagramのDMで問い合わせる</a>
+        </div>
+
+        <div class="faq reveal">
+            <h3>Q &amp; A</h3>
+            <details>
+                <summary>カメラを持っていなくても大丈夫ですか？</summary>
+                <p>大丈夫です！カメラの貸し出しを行っているので、持っていない人でも楽しめます。カメラ選びの相談にも乗ります。</p>
+            </details>
+            <details>
+                <summary>写真の経験がまったくありません。</summary>
+                <p>初心者からカメラガチ勢まで、みんな仲良く活動しています。カメラの使い方から教え合います。</p>
+            </details>
+            <details>
+                <summary>日吉以外のキャンパスでも入れますか？</summary>
+                <p>入れます。日吉・三田・矢上・芝共立・信濃町・湘南藤沢の6キャンパスすべてから部員が集まっています。</p>
+            </details>
+            <details>
+                <summary>他のサークルとの兼サーはできますか？</summary>
+                <p>できます。兼サーしている部員もたくさんいます。</p>
+            </details>
+            <details>
+                <summary>途中からの入サーはできますか？</summary>
+                <p>いつでも大歓迎です！！お気軽にご連絡ください。</p>
+            </details>
+            <details>
+                <summary>見学はできますか？</summary>
+                <p>InstagramのDMかメールでご連絡ください！その時に見学できる活動をお知らせいたします。</p>
+            </details>
+        </div>
+    </div>
+</section>
+
+</main>
+
+<!-- ===== フッター（連絡先・SNS） ===== -->
+<footer class="footer" id="contact">
+    <div class="tricolor"><i></i><i></i><i></i></div>
+    <div class="container footer__inner">
+        <div>
+            <a href="#top" class="logo">
+
+                <span class="logo__text"><small>KEIO CAMERA CLUB</small><strong>慶應カメラクラブ</strong></span>
+            </a>
+            <p class="footer__about">慶應義塾大学 文化団体連盟所属<br>創立100周年<br>日吉や三田など６つのキャンパスから159名が活動中。</p>
+        </div>
+        <div>
+            <h4>Menu</h4>
+            <ul>
+                <li><a href="#news">お知らせ</a></li>
+                <li><a href="#about">私たちについて</a></li>
+                <li><a href="#reports">活動報告</a></li>
+                <li><a href="#gallery">ギャラリー</a></li>
+                <li><a href="#request">撮影依頼</a></li>
+                <li><a href="#join">入部案内</a></li>
+            </ul>
+        </div>
+        <div>
+            <h4>Contact</h4>
+            <ul>
+                <li><a href="mailto:kcc@example.com">kcc@example.com</a></li>
+                <li><a href="https://instagram.com/" target="_blank" rel="noopener">Instagram</a></li>
+                <li><a href="https://x.com/keiocameraclub" target="_blank" rel="noopener">X（旧Twitter）</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="container footer__bottom">
+        <span>&copy; <span id="year"></span> Keio Camera Club</span>
+        <span>⚠︎写真の無断転載を禁じます</span>
+    </div>
+</footer>
+
+<!-- ===== ページの先頭へ戻るボタン ===== -->
+<button class="to-top" id="toTop" aria-label="ページの先頭へ">↑</button>
+
+<!-- ===== 動き（スライドショー・絞り込み・拡大表示など） ===== -->
+<script>
+const header = document.getElementById("header");
+const onScroll = () => header.classList.toggle("is-scrolled", window.scrollY > 60);
+window.addEventListener("scroll", onScroll);
+onScroll();
+
+document.getElementById("menuBtn").addEventListener("click", () => document.body.classList.toggle("menu-open"));
+document.querySelectorAll(".nav a").forEach(a => a.addEventListener("click", () => document.body.classList.remove("menu-open")));
+
+const slides = [...document.querySelectorAll("#slides .ph")];
+const dotsBox = document.getElementById("dots");
+let cur = 0, timer;
+slides.forEach((_, i) => {
+    const b = document.createElement("button");
+    b.setAttribute("aria-label", (i + 1) + "枚目");
+    b.addEventListener("click", () => go(i));
+    dotsBox.appendChild(b);
+});
+const dots = [...dotsBox.children];
+function go(i) {
+    slides[cur].classList.remove("is-active");
+    dots[cur].classList.remove("is-active");
+    cur = (i + slides.length) % slides.length;
+    slides[cur].classList.add("is-active");
+    void dots[cur].offsetWidth;
+    dots[cur].classList.add("is-active");
+    clearTimeout(timer);
+    timer = setTimeout(() => go(cur + 1), 6000);
+}
+go(0);
+
+const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add("is-visible"); io.unobserve(e.target); }
+    });
+}, { threshold: .12 });
+document.querySelectorAll(".reveal").forEach((el, i) => {
+    const sib = el.parentElement.querySelectorAll(":scope > .reveal");
+    if (sib.length > 2) el.style.transitionDelay = ([...sib].indexOf(el) % 4) * .1 + "s";
+    io.observe(el);
+});
+
+const REPORTS_SHOW = 4;
+document.querySelectorAll("#reports .reports > .report").forEach((r, i) => r.classList.toggle("is-over", i >= REPORTS_SHOW));
+document.querySelectorAll("#reportFilter button").forEach(btn => {
+    btn.addEventListener("click", () => {
+        document.querySelectorAll("#reportFilter button").forEach(b => b.classList.remove("is-active"));
+        btn.classList.add("is-active");
+        const f = btn.dataset.filter;
+        document.querySelector(".reports").classList.toggle("is-filtered", f !== "all");
+        document.querySelectorAll("#reports .reports > .report").forEach((r, i) => {
+            r.classList.toggle("is-hidden", f !== "all" && r.dataset.cat !== f);
+            r.classList.toggle("is-over", f === "all" && i >= REPORTS_SHOW);
+        });
+        const shown = document.querySelectorAll("#reports .reports > .report:not(.is-hidden)").length;
+        document.getElementById("reportsEmpty").hidden = shown > 0;
+    });
+});
+
+const modal = document.getElementById("modal");
+const modalBody = document.getElementById("modalBody");
+function closeModal() { modal.classList.remove("is-open"); document.body.style.overflow = archive.classList.contains("is-open") ? "hidden" : ""; }
+document.querySelectorAll(".report").forEach(r => {
+    r.addEventListener("click", () => {
+        const ph = r.querySelector(".ph").cloneNode(true);
+        modalBody.innerHTML = "";
+        modalBody.appendChild(ph);
+        setupSlider(ph);
+        const c = document.createElement("div");
+        c.className = "modal__content";
+        c.innerHTML = r.querySelector(".report__meta").outerHTML
+            + "<h3>" + r.querySelector("h3").innerHTML + "</h3>"
+            + r.querySelector(".report__body").innerHTML;
+        modalBody.appendChild(c);
+        modal.classList.add("is-open");
+        modal.scrollTop = 0;
+        document.body.style.overflow = "hidden";
+    });
+});
+document.getElementById("modalClose").addEventListener("click", closeModal);
+
+let slideToken = 0, slideGo = null;
+function setupSlider(ph) {
+    slideGo = null;
+    const base = ph.querySelector("img");
+    if (!base) return;
+    const src = base.getAttribute("src");
+    const m = src.match(/^(.*)\.(jpe?g|png|webp)$/i);
+    if (!m) return;
+    const cand = [src];
+    for (let k = 2; k <= 5; k++) cand.push(m[1] + "-" + k + "." + m[2]);
+    const found = [], token = ++slideToken;
+    let pending = cand.length;
+    cand.forEach((c, i) => {
+        const probe = new Image();
+        probe.onload = () => { found[i] = c; done(); };
+        probe.onerror = done;
+        probe.src = c;
+    });
+    function done() {
+        if (--pending > 0 || token !== slideToken) return;
+        const list = found.filter(Boolean);
+        if (list.length < 2) return;
+        base.remove();
+        const imgs = list.map(c => {
+            const im = document.createElement("img");
+            im.src = c; im.alt = ""; im.className = "m-slide";
+            ph.appendChild(im);
+            return im;
+        });
+        const dots = document.createElement("div");
+        dots.className = "m-dots";
+        const dotBtns = list.map((_, i) => {
+            const d = document.createElement("button");
+            d.setAttribute("aria-label", (i + 1) + "枚目");
+            d.addEventListener("click", e => { e.stopPropagation(); go(i); });
+            dots.appendChild(d);
+            return d;
+        });
+        const prev = document.createElement("button");
+        prev.className = "m-arrow m-arrow--prev"; prev.textContent = "←"; prev.setAttribute("aria-label", "前の写真");
+        const next = document.createElement("button");
+        next.className = "m-arrow m-arrow--next"; next.textContent = "→"; next.setAttribute("aria-label", "次の写真");
+        prev.addEventListener("click", e => { e.stopPropagation(); go(cur - 1); });
+        next.addEventListener("click", e => { e.stopPropagation(); go(cur + 1); });
+        ph.append(prev, next, dots);
+        let cur = 0;
+        const baseCredit = ph.getAttribute("data-credit");
+        function go(i) {
+            cur = (i + imgs.length) % imgs.length;
+            if (baseCredit !== null) ph.setAttribute("data-credit", cur === 0 ? baseCredit : (ph.getAttribute("data-credit-" + (cur + 1)) ?? baseCredit));
+            imgs.forEach((im, k) => im.classList.toggle("is-on", k === cur));
+            dotBtns.forEach((d, k) => d.classList.toggle("is-on", k === cur));
+        }
+        go(0);
+        slideGo = d => go(cur + d);
+        let sx = 0;
+        ph.addEventListener("touchstart", e => sx = e.touches[0].clientX, { passive: true });
+        ph.addEventListener("touchend", e => {
+            const dx = e.changedTouches[0].clientX - sx;
+            if (Math.abs(dx) > 50) go(cur + (dx < 0 ? 1 : -1));
+        });
+    }
+}
+document.addEventListener("keydown", e => {
+    if (!modal.classList.contains("is-open") || !slideGo) return;
+    if (e.key === "ArrowLeft") slideGo(-1);
+    if (e.key === "ArrowRight") slideGo(1);
+});
+modal.addEventListener("click", e => { if (e.target === modal) closeModal(); });
+
+const figs = [...document.querySelectorAll("#galleryGrid figure")];
+const lb = document.getElementById("lightbox");
+const lbImg = document.getElementById("lbImg");
+const lbCap = document.getElementById("lbCap");
+let gi = 0;
+let lbList = null;
+function showFig(i) {
+    if (lbList) {
+        gi = (i + lbList.length) % lbList.length;
+        lbImg.innerHTML = `<img class="lightbox__img" src="${lbList[gi].src}" alt="">`;
+        lbCap.textContent = lbList[gi].cap + "　（" + (gi + 1) + " / " + lbList.length + "）";
+        return;
+    }
+    gi = (i + figs.length) % figs.length;
+    const img = figs[gi].querySelector("img.g-extra.is-on") || figs[gi].querySelector("img");
+    lbImg.innerHTML = img
+        ? `<img class="lightbox__img" src="${img.src}" alt="">`
+        : `<div class="lightbox__img ph" data-label="${figs[gi].querySelector(".ph").dataset.label}"></div>`;
+    lbCap.textContent = figs[gi].querySelector("figcaption").textContent + "　（" + (gi + 1) + " / " + figs.length + "）";
+}
+function closeLb() { lb.classList.remove("is-open"); document.body.style.overflow = document.getElementById("works").classList.contains("is-open") ? "hidden" : ""; }
+figs.forEach((f, i) => f.addEventListener("click", () => {
+    lbList = null;
+    showFig(i); lb.classList.add("is-open"); document.body.style.overflow = "hidden";
+}));
+document.getElementById("lbClose").addEventListener("click", closeLb);
+document.getElementById("lbPrev").addEventListener("click", () => showFig(gi - 1));
+document.getElementById("lbNext").addEventListener("click", () => showFig(gi + 1));
+lb.addEventListener("click", e => { if (e.target === lb) closeLb(); });
+let sx = 0;
+lb.addEventListener("touchstart", e => sx = e.touches[0].clientX, { passive: true });
+lb.addEventListener("touchend", e => {
+    const dx = e.changedTouches[0].clientX - sx;
+    if (Math.abs(dx) > 50) showFig(gi + (dx < 0 ? 1 : -1));
+});
+document.addEventListener("keydown", e => {
+    if (e.key === "Escape") { closeLb(); closeModal(); }
+    if (!lb.classList.contains("is-open")) return;
+    if (e.key === "ArrowLeft") showFig(gi - 1);
+    if (e.key === "ArrowRight") showFig(gi + 1);
+});
+
+const REQUEST_MAIL = "kcc@example.com";
+
+document.getElementById("requestForm").addEventListener("submit", e => {
+    e.preventDefault();
+    const f = new FormData(e.target);
+    const body =
+        "【お名前】" + f.get("name") + "\n" +
+        "【団体名・ご所属】" + (f.get("org") || "-") + "\n" +
+        "【メールアドレス】" + f.get("email") + "\n" +
+        "【撮影の種類】" + f.get("type") + "\n" +
+        "【撮影希望日】" + (f.get("date") || "-") + "\n" +
+        "【撮影場所】" + (f.get("place") || "-") + "\n\n" +
+        "【ご依頼内容】\n" + f.get("message");
+    const subject = "【撮影依頼】" + f.get("name") + " 様より";
+    location.href = "mailto:" + REQUEST_MAIL +
+        "?subject=" + encodeURIComponent(subject) +
+        "&body=" + encodeURIComponent(body);
+});
+
+document.getElementById("year").textContent = new Date().getFullYear();
+const toTop = document.getElementById("toTop");
+window.addEventListener("scroll", () => toTop.classList.toggle("is-show", window.scrollY > 800));
+toTop.addEventListener("click", () => window.scrollTo({ top: 0 }));
+
+const G_INTERVAL = 6000;
+
+const G_CAPTIONS = {
+    "g16.jpg": "撮影者：R.S",
+};
+
+document.querySelectorAll("#galleryGrid figure").forEach((fig, idx) => {
+    const n = (fig.querySelector(".ph").dataset.label.match(/^g(\d)\.jpg$/) || [])[1];
+    if (!n) return;
+    const ph = fig.querySelector(".ph");
+    const extras = [];
+    let pending = 9;
+    for (let t = 1; t <= 9; t++) {
+        const src = "images/g" + t + n + ".jpg";
+        const probe = new Image();
+        probe.onload = () => { extras[t] = src; done(); };
+        probe.onerror = done;
+        probe.src = src;
+    }
+    function done() {
+        if (--pending > 0) return;
+        const list = extras.filter(Boolean);
+        if (!list.length) return;
+        const layers = list.map(src => {
+            const im = document.createElement("img");
+            im.src = src; im.alt = ""; im.className = "g-extra";
+            ph.appendChild(im);
+            return im;
+        });
+        let cur = -1;
+        const cap = fig.querySelector("figcaption");
+        const baseCap = cap ? cap.textContent : "";
+        function next() {
+            if (cur >= 0) layers[cur].classList.remove("is-on");
+            cur++;
+            if (cur >= layers.length) cur = ph.querySelector("img:not(.g-extra)") ? -1 : 0;
+            if (cur >= 0) layers[cur].classList.add("is-on");
+            if (cap) {
+                const file = cur >= 0 ? layers[cur].getAttribute("src").split("/").pop() : null;
+                cap.textContent = (file && G_CAPTIONS[file]) || baseCap;
+            }
+        }
+        if (!ph.querySelector("img:not(.g-extra)")) next();
+        const offset = (idx * G_INTERVAL / 8) + Math.random() * 1500;
+        setTimeout(() => { next(); setInterval(next, G_INTERVAL); }, offset + G_INTERVAL / 2);
+    }
+});
+
+const archive = document.getElementById("archive");
+const archiveList = document.getElementById("archiveList");
+const archiveFilter = document.getElementById("archiveFilter");
+function buildArchive() {
+    archiveList.innerHTML = "";
+    document.querySelectorAll("#reports .reports > .report").forEach(orig => {
+        const c = orig.cloneNode(true);
+        if (c.classList.contains("report--feature")) {
+            const wrap = c.querySelector(":scope > div:not(.ph)");
+            if (wrap) wrap.replaceWith(...wrap.childNodes);
+        }
+        c.classList.remove("report--feature", "is-hidden", "is-over", "reveal");
+        c.addEventListener("click", () => orig.click());
+        archiveList.appendChild(c);
+    });
+    archiveFilter.innerHTML = document.getElementById("reportFilter").innerHTML;
+    archiveFilter.querySelectorAll("button").forEach(btn => {
+        btn.classList.toggle("is-active", btn.dataset.filter === "all");
+        btn.addEventListener("click", () => {
+            archiveFilter.querySelectorAll("button").forEach(b => b.classList.remove("is-active"));
+            btn.classList.add("is-active");
+            const f = btn.dataset.filter;
+            let shown = 0;
+            archiveList.querySelectorAll(".report").forEach(r => {
+                const hide = f !== "all" && r.dataset.cat !== f;
+                r.classList.toggle("is-hidden", hide);
+                if (!hide) shown++;
+            });
+            document.getElementById("archiveEmpty").hidden = shown > 0;
+        });
+    });
+    document.getElementById("archiveEmpty").hidden = true;
+}
+function openArchive() {
+    buildArchive();
+    archive.classList.add("is-open");
+    archive.scrollTop = 0;
+    document.body.style.overflow = "hidden";
+}
+function closeArchive() {
+    archive.classList.remove("is-open");
+    document.body.style.overflow = "";
+}
+document.getElementById("archiveOpen").addEventListener("click", openArchive);
+document.getElementById("archiveClose").addEventListener("click", closeArchive);
+document.addEventListener("keydown", e => {
+    if (e.key === "Escape" && archive.classList.contains("is-open") && !modal.classList.contains("is-open")) closeArchive();
+}, true);
+
+const works = document.getElementById("works");
+const worksList = document.getElementById("worksList");
+let worksItems = null;
+const WORKS_SKIP = ["report5-2.jpg", "act3.jpg"];
+const WORKS_ORDER = ["g1.jpg", "g2.jpg", "g3.jpg", "g4.jpg", "g5.jpg", "g6.jpg", "g7.jpg", "g16.jpg", "g8.jpg",
+    "hero1.jpg", "hero2.jpg", "report3.jpg", "report3-2.jpg", "act1.jpg", "act2.jpg", "act4.jpg", "report4.jpg", "report4-2.jpg", "report5.jpg", "about2.jpg"];
+function probe(src) {
+    return new Promise(res => { const im = new Image(); im.onload = () => res(src); im.onerror = () => res(null); im.src = src; });
+}
+async function loadWorks() {
+    if (worksItems) return worksItems;
+    const baseCap = {};
+    document.querySelectorAll("#galleryGrid figure").forEach(f => {
+        const m = f.querySelector(".ph").dataset.label.match(/^g(\d)\.jpg$/);
+        if (m) baseCap[m[1]] = f.querySelector("figcaption").textContent;
+    });
+    const nums = Object.keys(baseCap);
+    const cand = [];
+    for (let t = 0; t <= 9; t++) nums.forEach(n => cand.push({ file: "g" + (t ? t : "") + n + ".jpg", n }));
+    const ok = await Promise.all(cand.map(c => probe("images/" + c.file)));
+    const rank = f => { const i = WORKS_ORDER.indexOf(f); return i < 0 ? 999 : i; };
+    worksItems = cand.filter((c, i) => ok[i]).sort((a, b) => rank(a.file) - rank(b.file)).map(c => ({
+        src: "images/" + c.file,
+        cap: (typeof G_CAPTIONS !== "undefined" && G_CAPTIONS[c.file]) || baseCap[c.n]
+    }));
+
+    const others = [];
+    document.querySelectorAll("main .ph[data-label]").forEach(ph => {
+        const label = ph.dataset.label;
+        if (/^g\d+\.jpg$/.test(label) || ph.closest(".archive")) return;
+        const m = label.match(/^(.*)\.(jpe?g|png|webp)$/i);
+        others.push({ file: label, cap: ph.dataset.credit || "" });
+        if (m && ph.closest(".report")) {
+            for (let k = 2; k <= 5; k++) others.push({ file: m[1] + "-" + k + "." + m[2], cap: ph.getAttribute("data-credit-" + k) || ph.dataset.credit || "" });
+        }
+    });
+    const seen = new Set(worksItems.map(w => w.src));
+    const uniq = others.filter(o => !WORKS_SKIP.includes(o.file) && !seen.has("images/" + o.file) && seen.add("images/" + o.file));
+    const ok2 = await Promise.all(uniq.map(o => probe("images/" + o.file)));
+    uniq.forEach((o, i) => { if (ok2[i]) worksItems.push({ src: "images/" + o.file, cap: o.cap }); });
+    const pos = w => { const i = WORKS_ORDER.indexOf(w.src.split("/").pop()); return i < 0 ? 999 : i; };
+    worksItems.sort((a, b) => pos(a) - pos(b));
+    return worksItems;
+}
+async function openWorks() {
+    works.classList.add("is-open");
+    works.scrollTop = 0;
+    document.body.style.overflow = "hidden";
+    const items = await loadWorks();
+    if (worksList.children.length) return;
+    items.forEach((w, i) => {
+        const f = document.createElement("figure");
+        f.innerHTML = `<img src="${w.src}" alt="" loading="lazy"><figcaption></figcaption>`;
+        f.querySelector("figcaption").textContent = w.cap;
+        const im = f.querySelector("img");
+        const fit = () => { if (im.naturalWidth > im.naturalHeight) im.classList.add("is-land"); };
+        im.complete ? fit() : im.addEventListener("load", fit);
+        f.addEventListener("click", () => { lbList = items; showFig(i); lb.classList.add("is-open"); });
+        worksList.appendChild(f);
+    });
+}
+function closeWorks() { works.classList.remove("is-open"); document.body.style.overflow = ""; }
+document.getElementById("worksOpen").addEventListener("click", openWorks);
+document.getElementById("worksClose").addEventListener("click", closeWorks);
+document.addEventListener("keydown", e => {
+    if (e.key === "Escape" && works.classList.contains("is-open") && !lb.classList.contains("is-open")) closeWorks();
+}, true);
+</script>
+</body>
+</html>
