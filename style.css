@@ -593,27 +593,6 @@ button { background: none; border: 0; cursor: pointer; }
 
 .flow { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin: 0 0 80px; padding: 0; list-style: none; counter-reset: flow; }
 .flow li { position: relative; padding: 0 24px; text-align: center; counter-increment: flow; }
-.flow li:not(:last-child)::after {
-    content: "";
-    position: absolute;
-    top: 34px; right: -6px;
-    width: 12px; height: 12px;
-    border-top: 1px solid var(--muted);
-    border-right: 1px solid var(--muted);
-    transform: rotate(45deg);
-}
-.flow li::before {
-    content: "0" counter(flow);
-    display: grid;
-    place-items: center;
-    width: 68px; height: 68px;
-    margin: 0 auto 18px;
-    border-radius: 50%;
-    background: var(--navy);
-    color: #fff;
-    font-family: var(--serif-en);
-    font-size: 22px;
-}
 .flow b { display: block; font-family: var(--serif-ja); font-size: 16px; margin-bottom: 6px; }
 .flow span { font-size: 13px; color: var(--muted); line-height: 1.8; display: block; }
 
