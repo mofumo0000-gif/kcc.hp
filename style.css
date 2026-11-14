@@ -160,24 +160,26 @@ button { background: none; border: 0; cursor: pointer; }
 .hero__content {
     position: absolute;
     z-index: 2;
-    left: 0; right: 0; bottom: 12vh;
+    left: 0; right: 0; bottom: 6vh;
     width: min(1320px, 92vw);
     margin: 0 auto;
 }
-.hero__en {
-    margin: 0 0 14px;
+.hero__title {
+    margin: 0 0 18px;
+    font-family: var(--serif-ja);
+    font-weight: 500;
+    font-size: clamp(16px, 1.8vw, 24px);
+    line-height: 1.6;
+    letter-spacing: .2em;
+}
+.hero .hero__en {
+    margin: 0;
     font-family: var(--serif-en);
     font-style: normal;
-    font-size: clamp(18px, 2vw, 24px);
+    font-weight: 400;
+    font-size: clamp(40px, 6vw, 100px);
+    line-height: 1.1;
     letter-spacing: .08em;
-}
-.hero__title {
-    margin: 0;
-    font-family: var(--serif-ja);
-    font-weight: 600;
-    font-size: clamp(36px, 6.4vw, 84px);
-    line-height: 1.35;
-    letter-spacing: .03em;
 }
 .hero__lead { margin: 24px 0 0; font-size: 14px; letter-spacing: .12em; opacity: .9; }
 .hero__en, .hero__title, .hero__lead {
@@ -185,7 +187,7 @@ button { background: none; border: 0; cursor: pointer; }
     transform: translateY(24px);
     animation: up 1.4s var(--ease) forwards;
 }
-.hero__title { animation-delay: .25s; }
+.hero__en { animation-delay: .25s; }
 .hero__lead  { animation-delay: .5s; }
 @keyframes up { to { opacity: 1; transform: none; } }
 
@@ -207,7 +209,7 @@ button { background: none; border: 0; cursor: pointer; }
     position: absolute;
     inset: 0;
     background: #fff;
-    animation: bar 6s linear forwards;
+    animation: bar 5s linear forwards;
     transform-origin: left;
 }
 @keyframes bar { from { transform: scaleX(0); } to { transform: scaleX(1); } }
@@ -726,6 +728,8 @@ button { background: none; border: 0; cursor: pointer; }
 }
 
 @media (max-width: 560px) {
+    .hero .hero__en { font-size: 10.5vw; }
+    .hero .hero__en span { display: block; white-space: nowrap; }
     .hero__dots { right: auto; left: 5vw; bottom: 5vh; }
     .activities, .reports { grid-template-columns: 1fr; }
     .schedule { grid-template-columns: 1fr 1fr; }

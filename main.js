@@ -24,7 +24,7 @@ function go(i) {
     void dots[cur].offsetWidth;
     dots[cur].classList.add("is-active");
     clearTimeout(timer);
-    timer = setTimeout(() => go(cur + 1), 6000);
+    timer = setTimeout(() => go(cur + 1), 5000);
 }
 go(0);
 
@@ -190,7 +190,7 @@ document.addEventListener("keydown", e => {
     if (e.key === "ArrowRight") showFig(gi + 1);
 });
 
-const REQUEST_MAIL = "kcc@example.com";
+const REQUEST_MAIL = "kcc.keio@gmail.com";
 
 document.getElementById("requestForm").addEventListener("submit", e => {
     e.preventDefault();
