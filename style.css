@@ -194,9 +194,19 @@ button { background: none; border: 0; cursor: pointer; }
 .hero__dots {
     position: absolute;
     z-index: 2;
-    right: 4vw; bottom: 12vh;
+    right: 4vw; bottom: 6vh;
     display: flex;
     gap: 10px;
+}
+.hero__credit {
+    position: absolute;
+    z-index: 2;
+    right: 4vw; bottom: calc(6vh + 16px);
+    margin: 0;
+    color: #fff;
+    font-size: 11px;
+    letter-spacing: .08em;
+    opacity: .75;
 }
 .hero__dots button {
     width: 34px; height: 2px;
@@ -656,7 +666,8 @@ button { background: none; border: 0; cursor: pointer; }
 .faq summary::before { content: "Q"; position: absolute; left: 0; font-family: var(--serif-en); font-size: 20px; color: var(--navy); top: 15px; }
 .faq summary::after { content: "+"; position: absolute; right: 8px; top: 16px; font-size: 22px; font-weight: 300; transition: transform .3s; }
 .faq details[open] summary::after { transform: rotate(45deg); }
-.faq details p { margin: 0; padding: 0 0 22px 34px; font-size: 14px; color: var(--muted); }
+.faq details p { position: relative; margin: 0; padding: 0 0 22px 34px; font-size: 14px; color: var(--muted); }
+.faq details p::before { content: "A"; position: absolute; left: 0; top: -2px; font-family: var(--serif-en); font-size: 20px; line-height: 1.4; color: var(--red); }
 
 .footer { background: #0b1a3d; color: rgba(255,255,255,.85); }
 .footer__inner { display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 60px; padding: 90px 0 60px; }
@@ -731,6 +742,7 @@ button { background: none; border: 0; cursor: pointer; }
     .hero .hero__en { font-size: 10.5vw; }
     .hero .hero__en span { display: block; white-space: nowrap; }
     .hero__dots { right: auto; left: 5vw; bottom: 5vh; }
+    .hero__credit { right: 5vw; bottom: calc(5vh - 8px); }
     .activities, .reports { grid-template-columns: 1fr; }
     .schedule { grid-template-columns: 1fr 1fr; }
     .schedule div { border-right: 0; }
@@ -776,13 +788,7 @@ button { background: none; border: 0; cursor: pointer; }
 }
 .ph[data-credit=""]::before { display: none; }
 .ph[data-credit]:hover::before { opacity: 1; }
-.hero .ph[data-credit]::before {
-    left: auto; right: 4vw; bottom: calc(12vh + 22px);
-    padding: 0;
-    background: none;
-    font-size: 11px;
-    opacity: .75;
-}
+.hero .ph[data-credit]::before { display: none; }
 @media (hover: none) { .ph[data-credit]::before { opacity: 1; } }
 
 .heading__en, .hero__en, .faq h3, .footer h4, .archive__bar .heading__en {

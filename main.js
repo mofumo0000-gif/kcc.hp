@@ -23,6 +23,7 @@ function go(i) {
     slides[cur].classList.add("is-active");
     void dots[cur].offsetWidth;
     dots[cur].classList.add("is-active");
+    document.getElementById("heroCredit").textContent = slides[cur].dataset.credit || "";
     clearTimeout(timer);
     timer = setTimeout(() => go(cur + 1), 5000);
 }
