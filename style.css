@@ -160,7 +160,7 @@ button { background: none; border: 0; cursor: pointer; }
 .hero__content {
     position: absolute;
     z-index: 2;
-    left: 0; right: 0; bottom: 6vh;
+    left: 0; right: 0; bottom: 9vh;
     width: min(1320px, 92vw);
     margin: 0 auto;
 }
