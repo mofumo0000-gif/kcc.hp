@@ -1,3 +1,24 @@
+const reportsList = document.getElementById("reportsList");
+REPORTS.slice()
+    .sort((a, b) => b.date.localeCompare(a.date))
+    .forEach((r, i) => {
+        const credits = (r.credits || []).map((c, k) =>
+            (k === 0 ? ' data-credit="' : ' data-credit-' + (k + 1) + '="') + c + '"').join("");
+        const text =
+            '<div class="report__meta"><time>' + r.date + '</time><span class="tag">' + r.cat + '</span></div>' +
+            '<h3>' + r.title + '</h3>' +
+            '<p class="report__excerpt">' + r.excerpt + '</p>' +
+            '<div class="report__body"><p>' + r.body.join("<br>") + '</p></div>';
+        const a = document.createElement("article");
+        a.className = "report reveal" + (i === 0 ? " report--feature" : "");
+        a.dataset.cat = r.cat;
+        a.innerHTML =
+            '<div class="ph" data-label="' + r.image + '"' + credits + '>' +
+            '<img src="images/' + r.image + '" alt="" onerror="this.remove()"></div>' +
+            (i === 0 ? '<div>' + text + '</div>' : text);
+        reportsList.appendChild(a);
+    });
+
 const header = document.getElementById("header");
 const onScroll = () => header.classList.toggle("is-scrolled", window.scrollY > 60);
 window.addEventListener("scroll", onScroll);

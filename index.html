@@ -163,56 +163,7 @@
             </div>
         </div>
 
-        <div class="reports">
-            <article class="report report--feature reveal" data-cat="写真展">
-                <div class="ph" data-label="report4.jpg" data-credit="撮影者：T.M" data-credit-2="撮影者：T.M"><img src="images/report4.jpg" alt="" onerror="this.remove()"></div>
-                <div>
-                    <div class="report__meta"><time>2026.11.05</time><span class="tag">写真展</span></div>
-                    <h3>三田祭で写真を展示します</h3>
-                    <p class="report__excerpt">三田祭期間中に院校舎2Fにて、部員たちの作品を展示します。お気軽に遊びに来てください。</p>
-                    <div class="report__body">
-                    <p>三田祭期間の11月20日から23日にかけ、三田キャンパスの院校舎2Fにて三田祭写真展を行います。
-                    <br>テーマは「百光繚乱」。部員たちの制作活動の集大成が並ぶほか、ZINEも販売する予定です。ぜひお見逃しなく！</p>
-                    </div>
-                </div>
-            </article>
-
-            <article class="report reveal" data-cat="撮影会">
-                <div class="ph" data-label="report1.jpg" data-credit="撮影者：mitei"><img src="images/report1.jpg" alt="" onerror="this.remove()"></div>
-                <div class="report__meta"><time>2026.11.01</time><span class="tag">撮影会</span></div>
-                <h3>早慶合同撮影会＠東京たてもの園</h3>
-                <p class="report__excerpt">11月1日、早稲田大学写真部と合同で撮影会を行いました。</p>
-                <div class="report__body">
-                <p>11月1日に早稲田大学写真部WPSの方々と、東京たてもの園にて合同の撮影会を開催しました。
-                        <br>当日は晴天。5つほどの班に分かれて園内を散策、交流を深めました。
-                        <br>好きな写真の話からサークル運営に至るまで、大いに刺激ある活動でした。</p>
-                </div>
-            </article>
-
-            <article class="report reveal" data-cat="合宿">
-                <div class="ph" data-label="report5.jpg" data-credit="撮影者：Y.H" data-credit-2="撮影者：M.A"><img src="images/report5.jpg" alt="" onerror="this.remove()"></div>
-                <div class="report__meta"><time>2026.08.31</time><span class="tag">合宿</span></div>
-                <h3>夏合宿 in 白馬</h3>
-                <p class="report__excerpt">8月31日〜9月2日、長野県の白馬村へ夏合宿に行きました。</p>
-                <div class="report__body">
-                <p>今年の夏合宿は、長野県の白馬村で行われました。
-                    <br>8月31日から9月2日まで、白馬村にて2泊3日の日程で合宿を開催しました。
-                    <br>1年生から3年生までの総勢40名ほどが参加し、宿でのBBQや花火、松本市内の散策などを楽しみました。
-                    <br>概ね天候にも恵まれ、充実した合宿となりました。</p>
-                </div>
-            </article>
-
-            <article class="report reveal" data-cat="撮影会">
-                <div class="ph" data-label="report3.jpg" data-credit="撮影者：T.K" data-credit-2="撮影者：S.L"><img src="images/report3.jpg" alt="" onerror="this.remove()"></div>
-                <div class="report__meta"><time>2026.05.10</time><span class="tag">撮影会</span></div>
-                <h3>新歓撮影会@日比谷・丸の内へ</h3>
-                <p class="report__excerpt">新入生を迎え、日比谷・丸の内付近を散策しながらの撮影会を行いました。</p>
-                <div class="report__body">
-                <p>5月10日に、新歓活動の一環として日比谷や丸の内を散策する撮影会を行いました。
-                    <br>新入生の中には一眼カメラを初めて扱う初心者も多く、履修相談もそこそこに部員から操作方法を教わり、撮影を楽しみました。</p>
-                </div>
-            </article>
-        </div>
+        <div class="reports" id="reportsList"></div>
         <p class="reports__empty" id="reportsEmpty" hidden>Nothing</p>
         <div class="reports__more reveal">
             <button class="btn" id="archiveOpen">これまでの活動をすべて見る</button>
@@ -453,6 +404,7 @@
 <button class="to-top" id="toTop" aria-label="ページの先頭へ">↑</button>
 
 <!-- ===== 動き ===== -->
+<script src="reports.js"></script>
 <script src="main.js"></script>
 </body>
 </html>
