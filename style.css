@@ -721,6 +721,7 @@ button { background: none; border: 0; cursor: pointer; }
         transition: opacity .4s, visibility .4s;
     }
     .nav__cta { font-family: var(--sans); font-size: 15px; margin-top: 10px; }
+    .header.is-scrolled { background: var(--paper); backdrop-filter: none; -webkit-backdrop-filter: none; }
     .menu-open .nav { opacity: 1; visibility: visible; }
     .menu-open .header { color: #fff; background: transparent; box-shadow: none; backdrop-filter: none; -webkit-backdrop-filter: none; }
     .menu-open { overflow: hidden; }
