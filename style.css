@@ -722,7 +722,7 @@ button { background: none; border: 0; cursor: pointer; }
     }
     .nav__cta { font-family: var(--sans); font-size: 15px; margin-top: 10px; }
     .menu-open .nav { opacity: 1; visibility: visible; }
-    .menu-open .header { color: #fff; background: transparent; box-shadow: none; }
+    .menu-open .header { color: #fff; background: transparent; box-shadow: none; backdrop-filter: none; -webkit-backdrop-filter: none; }
     .menu-open { overflow: hidden; }
 
     .news, .about, .request__intro, .request__box, .join, .footer__inner { grid-template-columns: 1fr; gap: 48px; }
