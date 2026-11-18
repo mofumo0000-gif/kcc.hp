@@ -239,7 +239,7 @@ toTop.addEventListener("click", () => window.scrollTo({ top: 0 }));
 const G_INTERVAL = 6000;
 
 const G_CAPTIONS = {
-    "g16.jpg": "撮影者：R.S",
+    "g16.jpg": "撮影者：M.O",
 };
 
 document.querySelectorAll("#galleryGrid figure").forEach((fig, idx) => {
