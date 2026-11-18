@@ -16,7 +16,7 @@ const REPORTS = [
         cat: "撮影会",
         title: "早慶合同撮影会＠東京たてもの園",
         image: "report1.jpg",
-        credits: ["撮影者：mitei"],
+        credits: ["撮影者：Y.K"],
         excerpt: "11月1日、早稲田大学写真部と合同で撮影会を行いました。",
         body: [
             "11月1日に早稲田大学写真部WPSの方々と、東京たてもの園にて合同の撮影会を開催しました。",
