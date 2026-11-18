@@ -240,6 +240,7 @@ const G_INTERVAL = 6000;
 
 const G_CAPTIONS = {
     "g16.jpg": "撮影者：M.O",
+    "g18.jpg": "撮影者：A.O",
 };
 
 document.querySelectorAll("#galleryGrid figure").forEach((fig, idx) => {
@@ -373,7 +374,7 @@ const works = document.getElementById("works");
 const worksList = document.getElementById("worksList");
 let worksItems = null;
 const WORKS_SKIP = ["report5-2.jpg", "act3.jpg"];
-const WORKS_ORDER = ["g1.jpg", "g2.jpg", "g3.jpg", "g4.jpg", "g5.jpg", "g6.jpg", "g7.jpg", "g16.jpg", "g8.jpg",
+const WORKS_ORDER = ["g1.jpg", "g2.jpg", "g3.jpg", "g4.jpg", "g5.jpg", "g6.jpg", "g7.jpg", "g16.jpg", "g8.jpg", "g18.jpg",
     "hero1.jpg", "hero2.jpg", "report3.jpg", "report3-2.jpg", "act1.jpg", "act2.jpg", "act4.jpg", "report4.jpg", "report4-2.jpg", "report5.jpg", "about2.jpg"];
 function probe(src) {
     return new Promise(res => { const im = new Image(); im.onload = () => res(src); im.onerror = () => res(null); im.src = src; });
