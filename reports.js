@@ -25,7 +25,7 @@ const REPORTS = [
         ],
     },
     {
-        date: "2026.08.31",
+        date: "2026.09.04",
         cat: "合宿",
         title: "夏合宿 in 白馬",
         image: "report5.jpg",
