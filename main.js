@@ -402,7 +402,7 @@ async function loadWorks() {
         if (/^g\d+\.jpg$/.test(label) || ph.closest(".archive")) return;
         const m = label.match(/^(.*)\.(jpe?g|png|webp)$/i);
         others.push({ file: label, cap: ph.dataset.credit || "" });
-        if (m && ph.closest(".report")) {
+        if (m && ph.closest(".report, .about__photos")) {
             for (let k = 2; k <= 5; k++) others.push({ file: m[1] + "-" + k + "." + m[2], cap: ph.getAttribute("data-credit-" + k) || ph.dataset.credit || "" });
         }
     });
