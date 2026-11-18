@@ -764,14 +764,16 @@ button { background: none; border: 0; cursor: pointer; }
     .reveal, .hero__en, .hero__title, .hero__lead { opacity: 1; transform: none; }
 }
 
-.gallery .ph img.g-extra {
+.gallery .ph img.g-extra,
+.about__photos .ph img.g-extra {
     position: absolute;
     inset: 0;
     z-index: 2;
     opacity: 0;
     transition: opacity 1.4s ease, transform 1s var(--ease);
 }
-.gallery .ph img.g-extra.is-on { opacity: 1; }
+.gallery .ph img.g-extra.is-on,
+.about__photos .ph img.g-extra.is-on { opacity: 1; }
 
 .ph[data-credit]::before {
     content: attr(data-credit);

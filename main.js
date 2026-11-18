@@ -284,6 +284,42 @@ document.querySelectorAll("#galleryGrid figure").forEach((fig, idx) => {
     }
 });
 
+document.querySelectorAll(".about__photos .ph").forEach(ph => {
+    const m = (ph.dataset.label || "").match(/^(.+)\.jpg$/);
+    if (!m) return;
+    const found = [];
+    let pending = 4;
+    for (let k = 2; k <= 5; k++) {
+        const src = "images/" + m[1] + "-" + k + ".jpg";
+        const probe = new Image();
+        probe.onload = () => { found[k] = src; done(); };
+        probe.onerror = done;
+        probe.src = src;
+    }
+    function done() {
+        if (--pending > 0) return;
+        const baseCredit = ph.dataset.credit || "";
+        const layers = [];
+        found.forEach((src, k) => {
+            if (!src) return;
+            const im = document.createElement("img");
+            im.src = src; im.alt = ""; im.className = "g-extra";
+            im.dataset.credit = ph.getAttribute("data-credit-" + k) || baseCredit;
+            ph.appendChild(im);
+            layers.push(im);
+        });
+        if (!layers.length) return;
+        let cur = -1;
+        function next() {
+            if (cur >= 0) layers[cur].classList.remove("is-on");
+            cur = cur + 1 >= layers.length ? -1 : cur + 1;
+            if (cur >= 0) layers[cur].classList.add("is-on");
+            ph.dataset.credit = cur >= 0 ? layers[cur].dataset.credit : baseCredit;
+        }
+        setInterval(next, G_INTERVAL);
+    }
+});
+
 const archive = document.getElementById("archive");
 const archiveList = document.getElementById("archiveList");
 const archiveFilter = document.getElementById("archiveFilter");
