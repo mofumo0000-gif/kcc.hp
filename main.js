@@ -212,7 +212,7 @@ document.addEventListener("keydown", e => {
     if (e.key === "ArrowRight") showFig(gi + 1);
 });
 
-const REQUEST_MAIL = "kcc.keio@gmail.com";
+const REQUEST_MAIL = "kcc.official.contact@gmail.com";
 
 document.getElementById("requestForm").addEventListener("submit", e => {
     e.preventDefault();
